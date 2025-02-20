@@ -17,23 +17,15 @@ Want to create reveal.js presentation in a graphical editor? Try <https://slides
 
 ---
 
-### Sponsors
-Hakim's open source work is supported by <a href="https://github.com/sponsors/hakimel">GitHub sponsors</a>. Special thanks to:
-<div align="center">
-  <table>
-    <td align="center">
-      <a href="https://workos.com/?utm_campaign=github_repo&utm_medium=referral&utm_content=revealjs&utm_source=github">
-        <div>
-          <img src="https://user-images.githubusercontent.com/629429/151508669-efb4c3b3-8fe3-45eb-8e47-e9510b5f0af1.svg" width="290" alt="WorkOS">
-        </div>
-        <b>Your app, enterprise-ready.</b>
-        <div>
-          <sub>Start selling to enterprise customers with just a few lines of code. Add Single Sign-On (and more) in minutes instead of months.</sup>
-        </div>
-      </a>
-    </td>
-  </table>
-</div>
+### Usage
+
+1. Install Node.js (10.0.0 or later)
+2. Clone this repository
+3. Move to the repo folder and install dependencies (`npm install`)
+4. Serve the presentation and monitor source files for changes (`npm start`)
+5. Open http://localhost:8000 to view your presentation
+
+
 
 ---
 
