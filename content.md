@@ -1,6 +1,6 @@
 # Linux Shell Tutorial
 
-* 2025-02-23
+* 2025-02-XX
 * ygLi, yxLi
 
 ------
@@ -25,11 +25,22 @@
 
 which is better?
 
+https://www.computerhope.com/issues/ch000619.htm
 
-<div style="display: flex; justify-content: space-between; align-items: center;">
+<div style="display: contents; justify-content: space-between; align-items: center;">
     <img src="./assets/GUI.png" alt="GUI" style="width:49%;">
     <img src="./assets/CLI.png" alt="CLI" style="width:49%;">
 </div>
+
+---
+
+### Why CLI is all you need?
+
+1. **Hackers** use CLI (CLI is cool 😎)
+2. Some times, **GUI is not available** (e.g. server, embedded system). And many powerful tools are CLI only (e.g. `git`, `ssh`, `vim`)
+3. CLI is more **efficient** (e.g. `mv` v.s. drag and drop)
+4. CLI is more **flexible** and **programmable** (e.g. `>`, `|`, `&&`)
+5. [UNIX philosophy](https://en.wikipedia.org/wiki/Unix_philosophy): "Do one thing and do it well"
 
 ------
 
@@ -62,17 +73,20 @@ Just like the Desktop in GUI world (from user’s view).
 
 ### What's SHELL?
 
+Knowledge chain of the first time you heard the word "Shell":
+
 1. What's Shell?
 2. Ah, the black screen with white text
-3. Shell? Terminal? Console? Bash? CMD? CLI? .... ?
-4. 🤯
+3. Open the shell in a software called Terminal
+4. Bash is a kind of shell in Linux
+5. <u>***Shell? Terminal? Console? Bash? CMD? CLI? .... ?***</u>
+6. 🤯
 
-*Google for answer*
-
+*Google for historical reasons*
 
 ------
 
-## 3. Use Shell
+## 3. Bash Shell
 
 本节中，我们专注 bash 脚本 (`echo $SHELL`)
 bash 是 Bourne Again Shell 的缩写，它是大多数 Linux 系统默认的 shell。
@@ -84,7 +98,7 @@ cmatrix
 
 sudo tree /
 
-sl
+sl -e
 
 ...
 ```
