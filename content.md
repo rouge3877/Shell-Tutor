@@ -74,6 +74,9 @@ Just like the Desktop in GUI world (from user’s view).
 
 ## 3. Use Shell
 
+本节中，我们专注 bash 脚本 (`echo $SHELL`)
+bash 是 Bourne Again Shell 的缩写，它是大多数 Linux 系统默认的 shell。
+
 ```bash[0:]
 echo "Hello, Shell"
 
@@ -177,7 +180,7 @@ tar -xf name-of-archive.tar # open a tar file in current directory
 
 * A lot of CLI tools, communication is required to do complex jobs.
     * 0 - `stdin`, the standard input stream.
-    * 1 - `stdout`, the standard output stream.
+    * 1 - `stdout`, the standard outr55.,mjyput stream.
     * 2 - `stderr`, the standard error stream.
 
 <img src="./assets/redirect-test.png" alt="redirect-test" style="width:70%;">
@@ -205,24 +208,131 @@ strace ./hello |& grep write # strace ./hello > /dev/null, strace ./hello 2> /de
 
 ### Further More
 
-* https://github.com/jlevy/the-art-of-command-line
 * 多找那个男人 `man`
 
 
 ------
 
-## Shell Scripts
+## 4. Shell Scripts
 
-```bash[0:]
+
+我们已经学习了如何在 `shell` 中执行命令，并使用管道将命令组合使用。
+但是，很多情况下我们需要执行一系列的操作并使用条件或循环这样的控制流。
+
+`shell` 脚本与其他脚本语言不同之处在于，`shell` 脚本针对 `shell` 所从事的相关工作进行了优化。
+因此，创建命令流程（`pipelines`）、将结果保存到文件、从标准输入中读取输入，这些都是 `shell` 脚本中的原生操作，这让它比通用的脚本语言更易用。
+
+---
+
+### Shell Script? Bash Script
+
+大多数 shell 都有自己的一套脚本语言，包括变量、控制流和自己的语法。
+
+
+---
+
+### Variables
+
+在 `bash` 中为变量赋值的语法是 `foo=bar`，访问变量中存储的数值，其语法为 `$foo`
+
+需要注意的是:
+1. `foo = bar`（使用空格隔开）不能正确工作: 因为解释器会调用程序 `foo` 并将 `=` 和 `bar` 作为参数。
+2. **在 `shell` 脚本中使用空格会起到分割参数的作用**
+
+---
+
+### Strings
+
+`Bash` 中的字符串通过 `'` 和 `"` 分隔符来定义，但是它们的含义并不相同:
+
+* 以 `'` 定义的字符串为原义字符串，其中的变量不会被转义
+* 而 `"` 定义的字符串会将变量值进行替换。
+
+```bash
+foo=bar
+echo "$foo" # 打印 bar
+echo '$foo' # 打印 $foo
 ```
 
 ---
 
-### TEst
+### Functions
 
-Note:
-adasd
 
+和其他大多数的编程语言一样, `bash` 也支持 `if`, `case`, `while` 和 `for` 这些控制流关键字。
+同样 `bash` 也支持函数，它可以接受参数并基于参数进行操作。
+
+下面这个函数是一个例子, 这里 `$1` 是脚本的第一个参数:
+
+```bash
+# 创建一个文件夹并进入该文件夹
+mcd () {
+    mkdir -p "$1"
+    cd "$1"
+}
+```
+
+与其他脚本语言不同的是，`bash` 使用了很多特殊的变量来表示<u>参数</u>、<u>错误代码</u>和<u>相关变量</u>
+
+---
+
+### Special Variables
+
+下面列举一些变量:
+
+* `$0` : 脚本名  
+* `$1` ~ `$9` : 脚本的参数。 `$1` 是第一个参数，依此类推
+* `$@` : 所有参数
+* `$#` : 参数个数
+* `$?` : 前一个命令的返回值  
+* `$$` : 当前脚本的进程识别码  
+* `!!` : 完整的上一条命令，包括参数。常见应用：当你因为权限不足执行命令失败时，可使用 `sudo !!` 再试一次。 
+* `$_` : 上一条命令的最后一个参数
+
+---
+
+### Short Circuiting
+
+退出码可以搭配 &&（与操作符）和 ||（或操作符）使用，用来进行条件判断，决定是否执行其他程序。
+它们都属于**短路运算符（short-circuiting）**。
+同一行的多个命令可以用 `;` 分隔。
+程序 true 的返回码永远是 0，false 的返回码永远是 1。
+
+```bash
+false || echo "Oops, fail"  
+# Oops, fail
+
+true || echo "Will not be printed"  
+#
+
+true && echo "Things went well"  
+# Things went well
+
+false && echo "Will not be printed"  
+#
+
+false ; echo "This will always run"  
+# This will always run
+```
+
+---
+
+### [Shabang](https://en.wikipedia.org/wiki/Shebang_(Unix))
+
+* `shabang` 是一个特殊的注释，用来告诉系统使用哪个解释器来执行脚本
+
+* [`#! + <Path of interpreter>`]() e.g.: `#!/bin/bash`, `#!/usr/bin/python`
+
+```bash
+#!/bin/bash
+echo "Hello, World!"
+```
+
+```bash
+#!/usr/bin/env python3
+# use env to find python3 in PATH
+print("Hello, World!")
+```
 
 ------
 
@@ -232,4 +342,5 @@ adasd
 
 > * MIT - [The Missing Semester](https://missing-semester-cn.github.io/)
 > * USTC - [Linux101](https://101.ustclug.org/)
+> * [The Art of Command Line](https://github.com/jlevy/the-art-of-command-line)
 
