@@ -201,7 +201,7 @@ tar -xf name-of-archive.tar # open a tar file in current directory
 
 ---
 
-### Combining Commands
+### Combining Commands (Further More)
 
 ```bash[0:]
 ls -l | grep 22[01234] | wc -l # count stu number
@@ -217,12 +217,11 @@ find . -type f -name "*.sh" -print0 | xargs -d "\0" zip -r shell.zip
 strace ./hello |& grep write # strace ./hello > /dev/null, strace ./hello 2> /dev/null
 ```
 
+* `man xargs`
+* `man grep` (e.g. `-P`: Perl-compatible regex, `-o`: only matching part)
+* `man sed` (e.g. `s/old/new/g`)
+* ... *(多找那个男人 `man`)*
 
----
-
-### Further More
-
-* 多找那个男人 `man`
 
 
 ------
