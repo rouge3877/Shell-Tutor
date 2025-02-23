@@ -206,7 +206,7 @@ tar -xf name-of-archive.tar # open a tar file in current directory
 ```bash[0:]
 ls -l | grep 22[01234] | wc -l # count stu number
 
-find . -name "*.[ch]" | xargs grep "#include" | sort | uniq # include files
+find . -type f -name '*.[ch]' | xargs cat | grep -Po "#include\s*<\w+\.?\w*>" | sed 's/[(#include)<>]//g' | sort | uniq | less
 
 diff <(ls -a ../yxli) <(ls -a ../ykliu)
 
