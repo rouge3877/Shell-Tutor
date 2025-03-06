@@ -1,73 +1,108 @@
-# Linux Shell Tutorial
+# `Linux Shell` Tutorial
 
-* 2025-02-XX
-* ygLi, yxLi
+* 2025-03
+* [ICS@XJTU](https://xjtu-ics.github.io/) - ygLi, yxLi
 
 ------
 
-## 0. Linux Shell
+## 1. Overview
 
-* Brief Intro: all you need to know about starting using a CLI.
-* Basic but useful command line tools.
-* How to write a bash scripts and what can those scripts do?
+1. **Brief Intro**: all you need to know about starting using shell.
+2. **Recommend**: basic but useful command line tools.
+3. **Automation**: write a bash scripts.
+4. **RTFM**: use `man` and `tldr`.
+
+
+***A brief tutorial for beginners**, so feel free to absent if you are familiar with shell* 🙉🙈
+
 
 ---
 
-### Target
+### GUI vs CLI
 
-1. Using **shell** to get the work done (doing experiment, coding, etc.) efficiently.
-2. Using **bash** script.
-3. 😍 The `man`.
 
-------
+As we all know, there are two ways to interact with a computer system: GUI and CLI.
 
-## 1. GUI vs CLI
-
-which is better?
-
-https://www.computerhope.com/issues/ch000619.htm
 
 <div style="display: contents; justify-content: space-between; align-items: center;">
     <img src="./assets/GUI.png" alt="GUI" style="width:49%;">
     <img src="./assets/CLI.png" alt="CLI" style="width:49%;">
 </div>
 
----
-
-### Why CLI is all you need?
-
-1. **Hackers** use CLI (CLI is cool 😎)
-2. Some times, **GUI is not available** (e.g. server, embedded system). And many powerful tools are CLI only (e.g. `git`, `ssh`, `vim`)
-3. CLI is more **efficient** (e.g. `mv` v.s. drag and drop)
-4. CLI is more **flexible** and **programmable** (e.g. `>`, `|`, `&&`)
-5. [UNIX philosophy](https://en.wikipedia.org/wiki/Unix_philosophy): "Do one thing and do it well"
+As a human being, we are more familiar with GUI, but CLI is also very powerful and efficient.
 
 ------
 
-## 2. Shell
+## 2. CLI
 
-The system user-interface in CLI.
+> "命令行"
+
 Just like the Desktop in GUI world (from user’s view).
 
-* Launch app
-* execute command
-* manage foreground/background tasks
+<table>
+   <tr>
+        <td><b>DO -</b></td>
+	<td><b>In GUI</b></td>
+	<td><b>In CLI (bash shell)</b></td>
+   </tr>
+    <tr>
+	<td>Create a file</td>
+	<td>Right click + New file</td>
+	<td><code>touch filename</code></td>
+    </tr>
+    <tr>
+	<td>Copy a file</td>
+	<td>Right click + Copy + Paste</td>
+	<td><code>cp file1 file2</code></td>
+    </tr>
+    <tr>
+	<td>Move a file</td>
+	<td>Drag and drop</td>
+	<td><code>mv file1 file2</code></td>
+    </tr>
+    <tr>
+	<td>Delete a file</td>
+	<td>Right click + Delete</td>
+	<td><code>rm filename</code></td>
+    </tr>
+    <tr>
+	<td>Launch an app</td>
+	<td>Click icon</td>
+	<td><code>./app</code></td>
+    </tr>
+    <tr>
+	<td>Quit an app</td>
+	<td>Click close button</td>
+	<td><code>Ctrl + C</code></td>
+    </tr>
+</table>
 
 ---
 
-### Basic Setup
+### Why should I use CLI?
 
-* Terminal (emulator): emulate a (texted-based) terminal inside the GUI environment.
+1. **Hackers** use CLI (Hackers are cool, so CLI is cool 😎)
+2. Some times, **GUI is not available** (e.g. server, embedded system). And many powerful tools are CLI only (e.g. `git`, `ssh`, `vim`)
+3. CLI is more **efficient** (e.g. `mv` v.s. drag and drop)
+4. CLI is more **flexible** and **programmable** (e.g. `>`, `|`, `&&`)
+5. ***ICS*** asks you to use CLI 😂
+5. [**UNIX philosophy**](https://en.wikipedia.org/wiki/Unix_philosophy): "Do one thing and do it well"
+    - http://www.catb.org/~esr/writings/taoup/html/ch01s06.html
 
-* *Try the tty: `Ctrl + Alt + F1` (F1-F6, in linux)*
 
-* SSH to server:
+---
+
+### Where is the Shell?
+
+1. Terminal (emulator): emulate a (texted-based) terminal inside the GUI environment.
+    * Linux: `kitty`, `gnome-terminal`, `konsole`, `xterm`, `terminator`, etc.
+    * Windows: `Windows Terminal`
+    * *Open `vscode` and `Ctrl + ~`*
+
+2. `SSH` to server:
     * `ssh <your stuid>-ics@igw.dfshan.net -p2291`
-    * Strong password or use ssh key to login
-    * Keyboard shortcuts
-        * `ctrl + r` (to find history), `tab` (to autofill)
-        * `ctrl + c` (to kill `SIGINT`)
 
+3. ***Try the tty: `Ctrl + Alt + F1` (F1-F6, in some Linux distros)***
 
 ---
 
@@ -77,10 +112,10 @@ Knowledge chain of the first time you heard the word "Shell":
 
 1. What's Shell?
 2. Ah, the black screen with white text
-3. Open the shell in a software called Terminal
+3. Terminal ... emulator?
 4. Bash is a kind of shell in Linux
-5. <u>***Shell? Terminal? Console? Bash? CMD? CLI? .... ?***</u>
-6. 🤯
+5. ***Shell? Terminal? Console? Bash? CMD? CLI? .... ?***
+6. 🤯 So many words, but it seems that they are all meaning the black screen with white text
 
 *Google for historical reasons*
 
@@ -88,10 +123,16 @@ Knowledge chain of the first time you heard the word "Shell":
 
 ## 3. Bash Shell
 
-本节中，我们专注 bash 脚本 (`echo $SHELL`)
+本节中，我们专注 [`bash shell`](https://www.gnu.org/software/bash/) (`echo $SHELL`)
+
 bash 是 Bourne Again Shell 的缩写，它是大多数 Linux 系统默认的 shell。
 
-```bash[0:]
+
+```bash
+command-name arg1 arg2 arg3 ... # Basic format
+```
+
+```bash
 echo "Hello, Shell"
 
 cmatrix
@@ -103,15 +144,10 @@ sl -e
 ...
 ```
 
-(*一行代码让你变成黑客*)
-
 ---
 
 ### Basic Tools (Commands)
 
-```bash
-command-name arg1 arg2 arg3 ... # Basic format
-```
 
 * Directories: `pwd`, `cd`, `mkdir`
 * File: `touch`, `cp`, `mv`, `rm`, `cat`, `less`
@@ -167,6 +203,18 @@ tar -xf name-of-archive.tar # open a tar file in current directory
 2. [Build from source](https://github.com/abishekvashok/cmatrix) (no suitable version, or need to modify their code)
     * README/INSTALL doc
     * configure and make install
+
+---
+
+### Authentication
+
+*Why can't i `apt install` on ics-server?* 😭x2
+
+* `sudo` - execute a command as another user, typically the superuser.
+    * `sudo apt update`
+    * `sudo apt install cmatrix`
+
+
 
 ---
 
