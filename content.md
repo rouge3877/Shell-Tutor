@@ -1,4 +1,4 @@
-# `Linux Shell` Tutorial (*t2*)
+# `Shell` Tutorial
 
 * 2025-03 | [ICS@XJTU](https://xjtu-ics.github.io/) | ygLi, yxLi
 
@@ -12,10 +12,10 @@
 
 ---
 
-### GUI vs CLI
+### Interactive with Computer System
 
 
-As we all know, there are two ways to interact with a computer system: GUI and CLI.
+As we all know, there are many ways to interact with a computer system: GUI, CLI, AR, VR, etc.
 
 
 <div style="display: contents; justify-content: space-between; align-items: center;">
@@ -30,22 +30,15 @@ As a human being, we are more familiar with GUI, but CLI is also very powerful a
 
 ### Why should I use CLI?
 
-1. **Hackers** use CLI (Hackers are cool, so CLI is cool 😎)
-2. Some times, **GUI is not available** (e.g. server, embedded system). And many powerful tools are CLI only (e.g. `git`, `ssh`, `vim`)
-3. CLI is more **efficient** (e.g. `mv` v.s. drag and drop)
-4. CLI is more **flexible** and **programmable** (e.g. `>`, `|`, `&&`)
-5. ***ICS*** asks you to use CLI 😂
-5. [**UNIX philosophy**](https://en.wikipedia.org/wiki/Unix_philosophy): "Do one thing and do it well"
-    - http://www.catb.org/~esr/writings/taoup/html/ch01s06.html
+1. Some times, **GUI is not available** (e.g. server, embedded system). And many powerful tools are CLI only (e.g. `git`, `ssh`, `vim`)
+2. CLI is more **efficient** (e.g. `mv` v.s. drag and drop)
+3. CLI is more **flexible** and **programmable** (e.g. `>`, `|`, `&&`)
+4. <u>***ICS*** hopes you to use CLI 😂</u>
 
 
 ------
 
-## 1. CLI
-
-> "命令行"
-
-### Where is the Shell?
+## 1. Basic Setup
 
 1. Terminal (emulator): emulate a (texted-based) terminal inside the GUI environment.
     * Linux: `kitty`, `gnome-terminal`, `konsole`, `xterm`, `terminator`, etc.
@@ -57,26 +50,10 @@ As a human being, we are more familiar with GUI, but CLI is also very powerful a
 
 3. ***Try the tty: `Ctrl + Alt + F1` (F1-F6, in some Linux distros)***
 
----
-
-### What's SHELL?
-
-Knowledge chain of the first time you heard the word "Shell":
- 
-> 1. What's Shell?
-> 2. Ah, the black screen with white text
-> 3. Terminal ... emulator?
-> 4. Bash is a kind of shell in Linux
-> 5. ***Shell? Terminal? Console? Bash? CMD? CLI? .... ?***
-> 6. 🤯 So many words, but it seems that they are all meaning the black screen with white text
-
-*Google for historical reasons*
-
-Anyway, kernel <--> shell (OS)
 
 ------
 
-## 2. Bash Shell
+## 2. Shell: The system user-interface in CLI
 
 本节中，我们专注 [`bash shell`](https://www.gnu.org/software/bash/) (`echo $0`)
 
@@ -178,16 +155,37 @@ tar -xf name-of-archive.tar # open a tar file in current directory
 
 ---
 
-### SO MANY COMMAND 😭
+### `Find`
 
-* `-h`, `--help`
-* `man` - man is the system's manual pager (<u>Ask the man XD</u>)
-    * `man -k ipc`
-    * `man man`
-    * Some of the following command can be found their manpage, but how about `cd` ?
-* `tldr` - https://github.com/tldr-pages/tldr
-    * There is room for simpler help pages focused on practical examples.
-    * `man tar` v.s. `tldr tar`
+Usage Scenario: search files in a directory
+
+* `-name`: search by name
+* `-type`: search by type
+* `-exec`: execute command on each file found
+
+```bash[0:]
+find . -type f -name "*.txt" # find all txt files in current directory
+find . -type f -name "*.txt" -exec cat {} \; # cat all txt files in current directory
+```
+
+
+---
+
+### `grep`
+
+Usage Scenario: search for a specific string in a file
+
+* `-i`: case insensitive
+* `-r`: recursive search
+* `-n`: show line number
+* `-v`: invert match
+
+```bash[0:]
+grep -i "hello" file.txt # search for "hello" in file.txt
+grep -r "hello" . # search for "hello" in all files in current directory
+grep -r "hello" . -n # search for "hello" in all files in current directory and show line number
+grep -r "hello" . -v # search for files that do not contain "hello" in current directory
+```
 
 ---
 
@@ -204,15 +202,16 @@ tar -xf name-of-archive.tar # open a tar file in current directory
 
 ---
 
-### Authentication
+### SO MANY COMMAND 😭
 
-*Why can't i `apt install` on ics-server?* 😭x2
-
-* `sudo` - execute a command as another user, typically the superuser.
-    * `sudo apt update`
-    * `sudo apt install cmatrix`
-
-
+* `-h`, `--help`
+* `man` - man is the system's manual pager (<u>Ask the man XD</u>)
+    * `man -k ipc`
+    * `man man`
+    * Some of the following command can be found their manpage, but how about `cd` ?
+* `tldr` - https://github.com/tldr-pages/tldr
+    * There is room for simpler help pages focused on practical examples.
+    * `man tar` v.s. `tldr tar`
 
 ---
 
@@ -220,7 +219,6 @@ tar -xf name-of-archive.tar # open a tar file in current directory
 
 * A lot of CLI tools, communication is required to do complex jobs.
 * Pipe: `|` use the `stdout` of previous command as the `stdin` of the next.
-    * `ls -l | grep 22[01234] | wc -l`
 
 <img src="./assets/pipe.png" alt="pipe" style="width:70%;">
 
@@ -254,7 +252,7 @@ ls -l | grep 22[01234] | wc -l # count stu number
 
 find . -type f -name '*.[ch]' | xargs cat | grep -Po "#include\s*<\w+\.?\w*>" | sed 's/[(#include)<>\t\ ]//g' | sort | uniq | less
 
-diff <(ls -a ../yxli) <(ls -a ../ykliu)
+diff <(ls -a foo) <(ls -a bar)
 
 du -sc /usr/bin/* | sort -nr | less
 
@@ -275,17 +273,7 @@ strace ./hello |& grep write # strace ./hello > /dev/null, strace ./hello 2> /de
 ## 3. Shell Scripts
 
 
-我们已经学习了如何在 `shell` 中执行命令，并使用管道将命令组合使用。
-但是，很多情况下我们需要执行一系列的操作并使用条件或循环这样的控制流。
-
-`shell` 脚本与其他脚本语言不同之处在于，`shell` 脚本针对 `shell` 所从事的相关工作进行了优化。
-因此，创建命令流程（`pipelines`）、将结果保存到文件、从标准输入中读取输入，这些都是 `shell` 脚本中的原生操作，这让它比通用的脚本语言更易用。
-
----
-
-### Shell Script? Bash Script
-
-大多数 shell 都有自己的一套脚本语言，包括变量、控制流和自己的语法。
+执行一系列的操作并使用条件或循环这样的控制流。
 
 
 ---
@@ -318,9 +306,6 @@ echo '$foo' # 打印 $foo
 ### Functions
 
 
-和其他大多数的编程语言一样, `bash` 也支持 `if`, `case`, `while` 和 `for` 这些控制流关键字。
-同样 `bash` 也支持函数，它可以接受参数并基于参数进行操作。
-
 下面这个函数是一个例子, 这里 `$1` 是脚本的第一个参数:
 
 ```bash
@@ -331,13 +316,12 @@ mcd () {
 }
 ```
 
-与其他脚本语言不同的是，`bash` 使用了很多特殊的变量来表示<u>参数</u>、<u>错误代码</u>和<u>相关变量</u>
 
 ---
 
 ### Special Variables
 
-下面列举一些变量:
+与其他脚本语言不同的是，`bash` 使用了很多特殊的变量来表示<u>参数</u>、<u>错误代码</u>和<u>相关变量</u>
 
 * `$0` : 脚本名  
 * `$1` ~ `$9` : 脚本的参数。 `$1` 是第一个参数，依此类推
@@ -350,37 +334,12 @@ mcd () {
 
 ---
 
-### Short Circuiting
-
-退出码可以搭配 &&（与操作符）和 ||（或操作符）使用，用来进行条件判断，决定是否执行其他程序。
-它们都属于**短路运算符（short-circuiting）**。
-同一行的多个命令可以用 `;` 分隔。
-程序 true 的返回码永远是 0，false 的返回码永远是 1。
-
-```bash
-false || echo "Oops, fail"  
-# Oops, fail
-
-true || echo "Will not be printed"  
-#
-
-true && echo "Things went well"  
-# Things went well
-
-false && echo "Will not be printed"  
-#
-
-false ; echo "This will always run"  
-# This will always run
-```
-
----
 
 ### [Shabang](https://en.wikipedia.org/wiki/Shebang_(Unix))
 
 * `shabang` 是一个特殊的注释，用来告诉系统使用哪个解释器来执行脚本
 
-* [`#! + <Path of interpreter>`]() e.g.: `#!/bin/bash`, `#!/usr/bin/python`
+* [`#! + <Path of interpreter>`](https://en.wikipedia.org/wiki/Shebang_(Unix)) e.g.: `#!/bin/bash`, `#!/usr/bin/python`
 
 ```bash
 #!/bin/bash
