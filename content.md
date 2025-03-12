@@ -78,6 +78,22 @@ sl -e
 
 ---
 
+### Basic Tools (Commands)
+
+
+* Directories: `pwd`, `cd`, `mkdir`
+* File: `touch`, `cp`, `mv`, `rm`, `cat`, `less`
+* Simple functions: `sort`, `wc`, `echo`
+* Others: `grep`, `chmod`
+* Code Editor: `vim`
+* monitor: `top`, `htop`
+* Network: `ping`, `ssh`, `scp`
+
+<img src="./assets/tmux.png" alt="tmux" style="width:45%;">
+
+
+---
+
 
 Just like the Desktop in GUI world (from user’s view).
 
@@ -117,22 +133,17 @@ Just like the Desktop in GUI world (from user’s view).
 	<td>Click close button</td>
 	<td><code>Ctrl + C</code></td>
     </tr>
+   <tr>
+        <td>查看后台程序</td>
+	<td>任务管理器</td>
+	<td>jobs</td>
+   </tr>
+   <tr>
+        <td>切换前后台程序</td>
+	<td>alt+tab</td>
+	<td>fg %n</td>
+   </tr>
 </table>
-
----
-
-### Basic Tools (Commands)
-
-
-* Directories: `pwd`, `cd`, `mkdir`
-* File: `touch`, `cp`, `mv`, `rm`, `cat`, `less`
-* Simple functions: `sort`, `wc`, `echo`
-* Others: `grep`, `chmod`
-* Code Editor: `vim`
-* Keep the connection: `tmux`, `screen`, etc.
-
-
-<img src="./assets/tmux.png" alt="tmux" style="width:45%;">
 
 ---
 
@@ -247,24 +258,20 @@ grep -r "hello" . -v # search for files that do not contain "hello" in current d
 
 ### Combining Commands (Further More)
 
-```bash[0:]
-ls -l | grep 22[01234] | wc -l # count stu number
+```bash
+# Count students number in server
 
-find . -type f -name '*.[ch]' | xargs cat | grep -Po "#include\s*<\w+\.?\w*>" | sed 's/[(#include)<>\t\ ]//g' | sort | uniq | less
+# fetch all include file
 
-diff <(ls -a foo) <(ls -a bar)
+# diff between two directories
 
-du -sc /usr/bin/* | sort -nr | less
+# check the disk usage of all files in /usr/bin
 
-find . -type f -name "*.sh" -print0 | xargs -d "\0" zip -r shell.zip
-
-strace ./hello |& grep write # strace ./hello > /dev/null, strace ./hello 2> /dev/null
 ```
 
 * `man xargs`
 * `man grep` (e.g. `-P`: Perl-compatible regex, `-o`: only matching part)
-* `man sed` (e.g. `s/old/new/g`)
-* ... *(多找那个男人 `man`)*
+* `man du`
 
 
 
@@ -273,7 +280,7 @@ strace ./hello |& grep write # strace ./hello > /dev/null, strace ./hello 2> /de
 ## 3. Shell Scripts
 
 
-执行一系列的操作并使用条件或循环这样的控制流。
+Shell script 是一种编程语言，它允许你将一系列的命令组合在一起并按照一定的顺序执行。
 
 
 ---
@@ -315,6 +322,26 @@ mcd () {
     cd "$1"
 }
 ```
+
+---
+
+### test
+
+```bash
+# 写法一
+test expression
+
+# 写法二
+[ expression ]
+
+# 写法三
+[[ expression ]]
+```
+
+* [ -e file ]：如果 file 存在，则为true。
+* [ string ]：如果string不为空（长度大于0），则判断为真。
+* [ string1 != string2 ]：如果string1和string2不相同，则判断为真。
+* [ integer1 -eq integer2 ]：如果integer1等于integer2，则为true。
 
 
 ---
