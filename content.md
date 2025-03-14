@@ -1,6 +1,6 @@
 # `Shell` Tutorial
 
-* 2025-03 | [ICS@XJTU](https://xjtu-ics.github.io/) | ygLi, yxLi
+* 2025-03 | [ICS@XJTU](https://xjtu-ics.github.io/) | ygLi, tTang, yxLi
 
 ***A brief tutorial for beginners**, so feel free to absent if you are familiar with shell* 🙉🙈
 
@@ -53,33 +53,65 @@ As a human being, we are more familiar with GUI, but CLI is also very powerful a
 
 ------
 
-## 2. Shell: The system user-interface in CLI
+## 2. Shell
 
-本节中，我们专注 [`bash shell`](https://www.gnu.org/software/bash/) (`echo $0`)
+The system user-interface in CLI
 
-bash 是 Bourne Again Shell 的缩写，它是大多数 Linux 系统默认的 shell。
+Today, we fouce on [`bash shell`](https://www.gnu.org/software/bash/)
+* `echo $0`
 
 
 ```bash
 command-name arg1 arg2 arg3 ... # Basic format
 ```
 
-```bash
-echo "Hello, Shell"
+<table>
+   <tr>
+    <td><b>DO -</b></td>
+	<td><b>In GUI</b></td>
+	<td><b>In CLI (bash shell)</b></td>
+   </tr>
+   <tr>
+	<td>Create a file</td>
+	<td>Right click, New file</td>
+	<td><code>touch filename</code></td>
+   </tr>
+   <tr>
+	<td>Move a file</td>
+	<td>Drag and drop</td>
+	<td><code>mv file1 file2</code></td>
+   </tr>
+   <tr>
+	<td>Launch an app</td>
+	<td>Click icon</td>
+	<td><code>./app</code></td>
+   </tr>
+   <tr>
+	<td>Quit an app</td>
+	<td>Click close button</td>
+	<td><code>Ctrl + C</code></td>
+   </tr>
+   <tr>
+	<td>Suspend an app</td>
+	<td>Minimize</td>
+	<td><code>Ctrl + Z</code></td>
+   </tr>
+   <tr>
+    <td>Show background process</td>
+    <td>Task Manager</td>
+    <td>jobs</td>
+   <tr>
+    <td>Background to foreground</td>
+    <td>alt+tab</td>
+    <td>fg %n</td>
+    </tr>
+</table>
 
-cmatrix
 
-sudo tree /
-
-sl -e
-
-...
-```
 
 ---
 
 ### Basic Tools (Commands)
-
 
 * Directories: `pwd`, `cd`, `mkdir`
 * File: `touch`, `cp`, `mv`, `rm`, `cat`, `less`
@@ -89,61 +121,7 @@ sl -e
 * monitor: `top`, `htop`
 * Network: `ping`, `ssh`, `scp`
 
-<img src="./assets/tmux.png" alt="tmux" style="width:45%;">
 
-
----
-
-
-Just like the Desktop in GUI world (from user’s view).
-
-<table>
-   <tr>
-        <td><b>DO -</b></td>
-	<td><b>In GUI</b></td>
-	<td><b>In CLI (bash shell)</b></td>
-   </tr>
-    <tr>
-	<td>Create a file</td>
-	<td>Right click + New file</td>
-	<td><code>touch filename</code></td>
-    </tr>
-    <tr>
-	<td>Copy a file</td>
-	<td>Right click + Copy + Paste</td>
-	<td><code>cp file1 file2</code></td>
-    </tr>
-    <tr>
-	<td>Move a file</td>
-	<td>Drag and drop</td>
-	<td><code>mv file1 file2</code></td>
-    </tr>
-    <tr>
-	<td>Delete a file</td>
-	<td>Right click + Delete</td>
-	<td><code>rm filename</code></td>
-    </tr>
-    <tr>
-	<td>Launch an app</td>
-	<td>Click icon</td>
-	<td><code>./app</code></td>
-    </tr>
-    <tr>
-	<td>Quit an app</td>
-	<td>Click close button</td>
-	<td><code>Ctrl + C</code></td>
-    </tr>
-   <tr>
-        <td>查看后台程序</td>
-	<td>任务管理器</td>
-	<td>jobs</td>
-   </tr>
-   <tr>
-        <td>切换前后台程序</td>
-	<td>alt+tab</td>
-	<td>fg %n</td>
-   </tr>
-</table>
 
 ---
 
@@ -155,7 +133,10 @@ Usage Scenario: archive files in 1 bundle
 * `-c`: create a tarball
 * `-x`: open a tarball
 * `-v`: verbose mode [displays progress]
+* `-t`: list files in a tarball
 * `-f`: specify file name
+
+**`-f` is always the last option**
 
 ```bash[0:]
 tar -cf name-of-archive.tar /path/to/dir/ # compress directory
@@ -163,6 +144,51 @@ tar -cf name-of-archive.tar /path/to/filename # compress file
 tar -cf name-of-archive.tar dir1 dir2 dir3 # compress multiple dirs
 tar -xf name-of-archive.tar # open a tar file in current directory
 ```
+
+---
+
+### `Tmux`
+
+Usage Scenario: manage multiple terminal sessions
+
+<img src="./assets/tmux.png" alt="tmux" style="width:45%;">
+
+
+* prefix key: `Ctrl + b`
+* Client-Server model: `tmux` (server) + `tmux attach` (client)
+
+---
+
+### `grep`
+
+Usage Scenario: search for a specific string in a file
+
+`grep + regex`
+
+* `-i`: case insensitive
+* `-r`: recursive search
+* `-n`: show line number
+* `-v`: invert match
+
+```bash[0:]
+grep -i "hello" file.txt # search for "hello" in file.txt
+grep -r "hello" . # search for "hello" in all files in current directory
+grep -r "hello" . -n # search for "hello" in all files in current directory and show line number
+grep -r "hello" . -v # search for files that do not contain "hello" in current directory
+```
+
+---
+
+### Interlude: SO MANY COMMAND 😭
+
+* `-h`, `--help`
+* `man`: man is the system's manual pager (<u>Ask the man XD</u>)
+    * `man -k ipc`
+    * `man man`
+    * Some of the following command can be found their manpage, but how about `cd` ?
+* `tldr`: https://github.com/tldr-pages/tldr
+    * There is room for simpler help pages focused on practical examples.
+    * `man tar` v.s. `tldr tar`
 
 ---
 
@@ -179,52 +205,34 @@ find . -type f -name "*.txt" # find all txt files in current directory
 find . -type f -name "*.txt" -exec cat {} \; # cat all txt files in current directory
 ```
 
-
 ---
 
-### `grep`
+### More Tools
 
-Usage Scenario: search for a specific string in a file
+- `awk`: a powerful pattern scanning and processing language
+- `sed`: a stream editor for filtering and transforming text
+- `curl`: transfer data from or to a server
+- `ag`: a code-searching tool similar to `grep`
+- `tree`: list contents of directories in a tree-like format
+- `htop`: an interactive process viewer for Unix
+- `cmatrix`: a program that simulates the display from "The Matrix"
+- `sl`: a steam locomotive runs across your terminal
 
-* `-i`: case insensitive
-* `-r`: recursive search
-* `-n`: show line number
-* `-v`: invert match
-
-```bash[0:]
-grep -i "hello" file.txt # search for "hello" in file.txt
-grep -r "hello" . # search for "hello" in all files in current directory
-grep -r "hello" . -n # search for "hello" in all files in current directory and show line number
-grep -r "hello" . -v # search for files that do not contain "hello" in current directory
-```
 
 ---
-
 
 ### Install Software in CLI
 
-1. Package manager: `apt` (ubuntu, Debian), `brew`(macOS), `dnf`(fedora)
+1. Package manager: `apt` (ubuntu, Debian), `brew`(macOS), `dnf`(fedora), `pacman`(arch)
     * Search (e.g. `apt search`)
     * https://command-not-found.com/
 
-2. [Build from source](https://github.com/abishekvashok/cmatrix) (no suitable version, or need to modify their code)
+2. [Build from source](https://github.com/abishekvashok/cmatrix)
     * README/INSTALL doc
     * configure and make install
 
 ---
 
-### SO MANY COMMAND 😭
-
-* `-h`, `--help`
-* `man` - man is the system's manual pager (<u>Ask the man XD</u>)
-    * `man -k ipc`
-    * `man man`
-    * Some of the following command can be found their manpage, but how about `cd` ?
-* `tldr` - https://github.com/tldr-pages/tldr
-    * There is room for simpler help pages focused on practical examples.
-    * `man tar` v.s. `tldr tar`
-
----
 
 ### Communication: Pipe
 
@@ -258,20 +266,16 @@ grep -r "hello" . -v # search for files that do not contain "hello" in current d
 
 ### Combining Commands (Further More)
 
-```bash
-# Count students number in server
+1. Count students number in server
+2. fetch all include file
+3. diff between two directories
+4. check the disk usage of all files in /usr/bin
 
-# fetch all include file
 
-# diff between two directories
 
-# check the disk usage of all files in /usr/bin
-
-```
-
-* `man xargs`
-* `man grep` (e.g. `-P`: Perl-compatible regex, `-o`: only matching part)
-* `man du`
+> * `xargs`
+> * `<()`: temporary file
+> * `$()`: command substitution
 
 
 
@@ -280,43 +284,88 @@ grep -r "hello" . -v # search for files that do not contain "hello" in current d
 ## 3. Shell Scripts
 
 
-Shell script 是一种编程语言，它允许你将一系列的命令组合在一起并按照一定的顺序执行。
+Shell is also a programming language, which allows you to combine a series of commands and execute
 
 
 ---
 
 ### Variables
 
-在 `bash` 中为变量赋值的语法是 `foo=bar`，访问变量中存储的数值，其语法为 `$foo`
+In `bash`, the syntax for assigning a value to a variable is `foo=bar`, and to access the value stored in a variable, the syntax is `$foo`.
 
-需要注意的是:
-1. `foo = bar`（使用空格隔开）不能正确工作: 因为解释器会调用程序 `foo` 并将 `=` 和 `bar` 作为参数。
-2. **在 `shell` 脚本中使用空格会起到分割参数的作用**
+Notes:
+1. `foo = bar` (with spaces around `=`) will not work: the interpreter will try to run a program `foo` with `=` and `bar` as arguments.
+2. **In `shell` scripts, spaces are used to separate arguments.**
 
 ---
 
 ### Strings
 
-`Bash` 中的字符串通过 `'` 和 `"` 分隔符来定义，但是它们的含义并不相同:
+In `Bash`, strings can be defined using `'` and `"`, but they have different meanings:
 
-* 以 `'` 定义的字符串为原义字符串，其中的变量不会被转义
-* 而 `"` 定义的字符串会将变量值进行替换。
+* Strings defined with `'` are literal strings, where variables are not replaced.
+* Strings defined with `"` are strings where variables are replaced with their values.
+* read more in Official [Bash Manual](https://www.gnu.org/software/bash/manual/html_node/Quoting.html)
+
 
 ```bash
 foo=bar
-echo "$foo" # 打印 bar
-echo '$foo' # 打印 $foo
+echo "$foo" # print bar
+echo '$foo' # print $foo
 ```
 
 ---
 
+### Control Structures
+
+
+```bash
+if [ expression ]; then
+    # do something
+elif [ expression ]; then
+    # do something
+else
+    # do something
+fi
+```
+
+```bash
+for i in 1 2 3 4 5; do
+    echo $i
+done
+```
+
+```bash
+while [ expression ]; do
+    # do something
+done
+```
+---
+
+### test
+
+```bash
+test expression
+
+[ expression ]
+
+[[ expression ]]
+```
+
+* [ -e file ]：if file exists, then true.
+* [ string ]：if string is not empty (length > 0), then true.
+* [ string1 != string2 ]：if string1 and string2 are different, then true.
+* [ integer1 -eq integer2 ]：if integer1 equals to integer2, then true.
+    * **do not confuse with numeric and string comparison**
+
+
+---
+
+
 ### Functions
 
 
-下面这个函数是一个例子, 这里 `$1` 是脚本的第一个参数:
-
 ```bash
-# 创建一个文件夹并进入该文件夹
 mcd () {
     mkdir -p "$1"
     cd "$1"
@@ -325,48 +374,26 @@ mcd () {
 
 ---
 
-### test
-
-```bash
-# 写法一
-test expression
-
-# 写法二
-[ expression ]
-
-# 写法三
-[[ expression ]]
-```
-
-* [ -e file ]：如果 file 存在，则为true。
-* [ string ]：如果string不为空（长度大于0），则判断为真。
-* [ string1 != string2 ]：如果string1和string2不相同，则判断为真。
-* [ integer1 -eq integer2 ]：如果integer1等于integer2，则为true。
-
-
----
-
 ### Special Variables
 
-与其他脚本语言不同的是，`bash` 使用了很多特殊的变量来表示<u>参数</u>、<u>错误代码</u>和<u>相关变量</u>
+Different from other scripting languages, `bash` uses many special variables to represent <u>parameters</u>, <u>error codes</u>, and <u>related variables</u>
 
-* `$0` : 脚本名  
-* `$1` ~ `$9` : 脚本的参数。 `$1` 是第一个参数，依此类推
-* `$@` : 所有参数
-* `$#` : 参数个数
-* `$?` : 前一个命令的返回值  
-* `$$` : 当前脚本的进程识别码  
-* `!!` : 完整的上一条命令，包括参数。常见应用：当你因为权限不足执行命令失败时，可使用 `sudo !!` 再试一次。 
-* `$_` : 上一条命令的最后一个参数
+* `$0` : script name
+* `$1` ~ `$9` : script parameters. `$1` is the first parameter, and so on.
+* `$@` : all parameters
+* `$#` : number of parameters
+* `$?` : return value of the previous command
+* `$$` : process ID of the current script
+* `!!` : the last command, including parameters. Common usage: when you fail to execute a command due to insufficient permissions, you can use `sudo !!` to try again.
+* `$_` : the last parameter of the last command
 
 ---
 
 
 ### [Shabang](https://en.wikipedia.org/wiki/Shebang_(Unix))
 
-* `shabang` 是一个特殊的注释，用来告诉系统使用哪个解释器来执行脚本
-
-* [`#! + <Path of interpreter>`](https://en.wikipedia.org/wiki/Shebang_(Unix)) e.g.: `#!/bin/bash`, `#!/usr/bin/python`
+* `shabang` (`#!`) is a special comment that tells the system which interpreter to use to execute the script
+* [`#! + <Path of interpreter>`](https://en.wikipedia.org/wiki/Shebang_(Unix))
 
 ```bash
 #!/bin/bash
@@ -379,24 +406,21 @@ echo "Hello, World!"
 print("Hello, World!")
 ```
 
-------
-
-## 4. Overview Again
-
-1. **Brief Intro**: all you need to know about starting using shell.
-2. **Recommend**: basic but useful command line tools.
-3. **Automation**: write a bash scripts.
-4. **RTFM**: use `man` and `tldr`.
-
 
 ---
 
+### `builtin`
 
-## The Best Way to Learn it , is to use it.
+* `source` or `.`: run commands in the current shell
+* `cd`: change directory
+* ..., read more in `man bash-builtins`
 
-## Happy Shell-ing `XD`
+------
 
-> * MIT - [The Missing Semester](https://missing-semester-cn.github.io/)
-> * USTC - [Linux101](https://101.ustclug.org/)
-> * [The Art of Command Line](https://github.com/jlevy/the-art-of-command-line)
+
+## $. The Best Way to Learn it , is to use it.
+
+* MIT - [The Missing Semester](https://missing-semester-cn.github.io/)
+* USTC - [Linux101](https://101.ustclug.org/)
+* [The Art of Command Line](https://github.com/jlevy/the-art-of-command-line)
 
