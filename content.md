@@ -16,8 +16,7 @@ As we all know, there are many ways to interact with a computer system: GUI, CLI
 
 
 <div style="display: contents; justify-content: space-between; align-items: center;">
-    <img src="./assets/GUI.png" alt="GUI" style="width:49%;">
-    <img src="./assets/CLI.png" alt="CLI" style="width:49%;">
+    <img src="./assets/GUICLI.png" alt="GUI" style="width:100%;">
 </div>
 
 As a human being, we are more familiar with GUI, but CLI is also very powerful and efficient.
@@ -32,7 +31,7 @@ As a human being, we are more familiar with GUI, but CLI is also very powerful a
 3. CLI is more **flexible** and **programmable** (e.g. `>`, `|`, `&&`)
 4. <u>***ICS*** hopes you to use CLI 😂</u>
 
----
+` `
 
 ### Overview
 
@@ -40,7 +39,7 @@ As a human being, we are more familiar with GUI, but CLI is also very powerful a
 1. **Brief Intro**: all you need to know about starting using shell.
 2. **Recommend**: basic but useful command line tools.
 3. **Automation**: write a bash scripts.
-4. **RTFM**: use `man` and `tldr`.
+- ***RTFM**: use `man` and `tldr`.*
 
 
 
@@ -57,6 +56,8 @@ As a human being, we are more familiar with GUI, but CLI is also very powerful a
     * `ssh <your stuid>-ics@igw.dfshan.net -p2291`
 
 3. ***Try the tty: `Ctrl + Alt + F1` (F1-F6, in some Linux distros)***
+
+**[The TTY demystified](https://www.linusakesson.net/programming/tty/)**
 
 
 ------
