@@ -1,14 +1,11 @@
 # `Shell` Tutorial
 
-* 2025-03 | [ICS@XJTU](https://xjtu-ics.github.io/) | ygLi, tTang, yxLi
+* 2025-03
+* [ICS@XJTU](https://xjtu-ics.github.io/)
+*  Yunguang Li, Tang Tang, Yuxuan Li
 
 ***A brief tutorial for beginners**, so feel free to absent if you are familiar with shell* 🙉🙈
 
-
-1. **Brief Intro**: all you need to know about starting using shell.
-2. **Recommend**: basic but useful command line tools.
-3. **Automation**: write a bash scripts.
-4. **RTFM**: use `man` and `tldr`.
 
 ---
 
@@ -35,6 +32,17 @@ As a human being, we are more familiar with GUI, but CLI is also very powerful a
 3. CLI is more **flexible** and **programmable** (e.g. `>`, `|`, `&&`)
 4. <u>***ICS*** hopes you to use CLI 😂</u>
 
+---
+
+### Overview
+
+
+1. **Brief Intro**: all you need to know about starting using shell.
+2. **Recommend**: basic but useful command line tools.
+3. **Automation**: write a bash scripts.
+4. **RTFM**: use `man` and `tldr`.
+
+
 
 ------
 
@@ -53,11 +61,9 @@ As a human being, we are more familiar with GUI, but CLI is also very powerful a
 
 ------
 
-## 2. Shell
+## 2. Shell: The "Shell" of the Kernel
 
-The system user-interface in CLI
-
-Today, we fouce on [`bash shell`](https://www.gnu.org/software/bash/)
+We fouce on [`bash shell`](https://www.gnu.org/software/bash/)
 * `echo $0`
 
 
@@ -120,6 +126,7 @@ command-name arg1 arg2 arg3 ... # Basic format
 * Code Editor: `vim`
 * monitor: `top`, `htop`
 * Network: `ping`, `ssh`, `scp`
+
 
 
 
@@ -271,12 +278,14 @@ find . -type f -name "*.txt" -exec cat {} \; # cat all txt files in current dire
 3. diff between two directories
 4. check the disk usage of all files in /usr/bin
 
-
-
 > * `xargs`
 > * `<()`: temporary file
 > * `$()`: command substitution
 
+* Build a temporary tools combination
+* We a programming
+    * a "Natural programming language"
+    * Cooprate tools togather
 
 
 ------
@@ -419,6 +428,8 @@ print("Hello, World!")
 
 
 ## $. The Best Way to Learn it , is to use it.
+
+"Unix is user-friendly; it's just choosy about who its friends are."
 
 * MIT - [The Missing Semester](https://missing-semester-cn.github.io/)
 * USTC - [Linux101](https://101.ustclug.org/)
